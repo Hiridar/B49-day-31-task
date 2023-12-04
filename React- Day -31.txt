@@ -1,0 +1,46 @@
+React- Day -11:
+       Create an admin dashboard for a library management system that allows users to manage book and author details. Use Formik for all form validations.
+
+
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+const AddBookForm = () => {
+ const initialValues = {
+    title: '',
+    author: '',
+    isbn: '',
+    publicationDate: ''
+ };
+
+ const validationSchema = Yup.object({
+    title: Yup.string().required('Title is required'),
+    author: Yup.string().required('Author is required'),
+    isbn: Yup.string().required('ISBN is required'),
+    publicationDate: Yup.date().required('Publication date is required')
+ });
+
+ const handleSubmit = (values, { setSubmitting }) => {
+    // Submit the form data to the backend API
+ };
+
+ return (
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+      {({ isSubmitting }) => (
+        <Form>
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <Field name="title" type="text" className="form-control" />
+            <ErrorMessage name="title" component="div" className="text-danger" />
+          </div>
+          // Additional form fields and submit button here
+        </Form>
+      )}
+    </Formik>
+ );
+};
+
+export default AddBookForm;
+
+
